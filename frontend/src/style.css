@@ -1,0 +1,146 @@
+/* ============================================================
+   GUTSY SHINOBI — style.css
+   Replaces the default Vite style.css
+   ============================================================ */
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #1a1a2e;   /* deep navy — matches inferno / night palettes */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;       /* prevent scroll bars during resize */
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a2e;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Phaser mounts into #app */
+#app {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Phaser canvas itself */
+#app canvas {
+  display: block;
+  outline: none;
+  /* Thin border so the play area has presence on large monitors */
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+/* ---- Any future HTML UI overlaid on the canvas ---- */
+.ui-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* ---- Ad panel placeholder styling (HTML layer, if needed later) ---- */
+.ad-panel {
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  background: rgba(10, 10, 20, 0.92);
+  border: 1px solid rgba(80, 80, 120, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+  gap: 20px;
+  pointer-events: none; /* game clicks pass through */
+}
+
+.ad-panel.left  { left: 0; }
+.ad-panel.right { right: 0; }
+
+.ad-slot {
+  width: 104px;
+  height: 200px;
+  border: 1px solid rgba(60, 80, 100, 0.5);
+  background: rgba(10, 15, 25, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(80, 100, 130, 0.6);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+/* ---- Buttons (used if any HTML UI is added) ---- */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #1e1e30;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+button:hover {
+  border-color: #646cff;
+  background-color: #25253d;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 3px auto -webkit-focus-ring-color;
+}
+
+/* ---- Links ---- */
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: none;
+}
+a:hover { color: #535bf2; }
+
+/* ---- Scrollbar (for leaderboard pages if ever HTML) ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }

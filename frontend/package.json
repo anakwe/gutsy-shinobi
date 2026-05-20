@@ -1,0 +1,31 @@
+{
+  "name": "gutsy-shinobi",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Arcade browser game inspired by Flappy Bird, built with Vite + Phaser.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kelly Corlett",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anakwe/gutsy-shinobi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anakwe/gutsy-shinobi/issues"
+  },
+  "homepage": "https://github.com/anakwe/gutsy-shinobi#readme",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0"
+  }
+}
