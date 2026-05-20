@@ -11,4 +11,3 @@ This repo was trimmed down to the frontend-only browser game before the GitHub u
 - Keycloak local-development files (`.env.example`, `docker-compose.yml`, `docs/keycloak-dev.md`)
 - Python packaging files (`pyproject.toml`, `poetry.lock`)
 - Empty root `Makefile`
-

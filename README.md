@@ -67,11 +67,3 @@ Note: there is currently one known failing assertion in `frontend/src/game/persi
 - Architecture notes: `docs/architecture-notes.md`
 - Archived assets/code notes: `docs/archive/README.md`
 
-## Public release notes
-
-Before publishing this as a new public GitHub repository:
-
-1. Complete `docs/release-checklist.md`.
-2. Fix the known failing test.
-3. Confirm `repository`, `bugs`, and `homepage` in `frontend/package.json` point to `https://github.com/anakwe/gutsy-shinobi`.
-4. Tag a release (for example, `v1.0.0`) after tests/build pass.

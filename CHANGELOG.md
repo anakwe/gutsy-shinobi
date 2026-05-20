@@ -22,4 +22,3 @@ All notable changes to this project are documented in this file.
 
 - Corrected leaderboard name-sanitization test expectation in `frontend/src/game/persistence/leaderboardStore.test.js`.
 - Resolved npm dependency advisories via `npm audit fix`.
-

@@ -26,4 +26,3 @@ Use this checklist before making the repository public.
 
 - [ ] Enable GitHub secret scanning and dependency alerts.
 - [ ] Add branch protection and required checks before merge.
-

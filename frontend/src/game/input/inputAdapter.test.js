@@ -116,4 +116,3 @@ describe("inputAdapter", () => {
     expect(keyboard.count("keydown-SPACE")).toBe(0);
   });
 });
-

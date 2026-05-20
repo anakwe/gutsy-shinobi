@@ -1,6 +1,12 @@
 __pycache__/
 .venv/
+node_modules/
+dist/
+build/
+coverage/
 .env
+.env.*
+*.log
 *.pyc
 .poetry/
 .mypy_cache/

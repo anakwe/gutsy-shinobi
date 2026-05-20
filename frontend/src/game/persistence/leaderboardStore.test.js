@@ -77,4 +77,3 @@ describe("leaderboardStore", () => {
     expect(text).toContain("99");
   });
 });
-

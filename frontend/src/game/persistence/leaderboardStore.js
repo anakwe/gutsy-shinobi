@@ -19,7 +19,12 @@ export function sanitiseName(name, maxLength = 12) {
     .slice(0, maxLength);
 }
 
-export function loadLeaderboard(storage, key, max = DEFAULT_MAX, now = Date.now) {
+export function loadLeaderboard(
+  storage,
+  key,
+  max = DEFAULT_MAX,
+  now = Date.now,
+) {
   const raw = storage.getItem(key);
   const list = safeJsonParse(raw, []);
   if (!Array.isArray(list)) return [];
@@ -46,7 +51,13 @@ export function saveLeaderboard(storage, key, list) {
   }
 }
 
-export function isHighScore(storage, key, score, max = DEFAULT_MAX, now = Date.now) {
+export function isHighScore(
+  storage,
+  key,
+  score,
+  max = DEFAULT_MAX,
+  now = Date.now,
+) {
   const value = Number(score) || 0;
   const board = loadLeaderboard(storage, key, max, now);
   if (board.length < max) return value > 0;
@@ -86,4 +97,3 @@ export function formatLeaderboardText(board) {
     )
     .join("\n");
 }
-
