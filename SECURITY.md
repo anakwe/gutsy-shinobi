@@ -24,3 +24,4 @@ The maintainer will acknowledge receipt and provide follow-up steps.
 - This is a frontend-only game.
 - Leaderboard entries are stored locally in browser `localStorage`.
 - No game data is transmitted to external services by default.
+

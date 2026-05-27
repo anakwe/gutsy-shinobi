@@ -2,6 +2,23 @@
 
 Local browser game inspired by Flappy Bird: guide the shinobi through bamboo gates, survive hazards, and set local high scores.
 
+## Gameplay Preview
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="docs/gifs/gameplay-level1.gif" alt="Gameplay run through level 1" width="420" />
+      <br />
+      <sub>Main gameplay loop</sub>
+    </td>
+    <td align="center">
+      <img src="docs/gifs/leaderboard-showcase.gif" alt="Leaderboard display and high score flow" width="420" />
+      <br />
+      <sub>Leaderboard and score flow</sub>
+    </td>
+  </tr>
+</table>
+
 ## What this repo contains
 
 - `frontend/`: Vite + Phaser browser game (the app)
@@ -66,4 +83,3 @@ Note: there is currently one known failing assertion in `frontend/src/game/persi
 - Release checklist: `docs/release-checklist.md`
 - Architecture notes: `docs/architecture-notes.md`
 - Archived assets/code notes: `docs/archive/README.md`
-

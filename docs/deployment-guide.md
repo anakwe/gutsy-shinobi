@@ -50,3 +50,4 @@ Manual smoke tests:
 - Verify keyboard and touch interactions.
 - Verify game-over and restart behavior.
 - Verify leaderboard persists after page refresh.
+
