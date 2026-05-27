@@ -4,20 +4,11 @@ Local browser game inspired by Flappy Bird: guide the shinobi through bamboo gat
 
 ## Gameplay Preview
 
-<table>
-  <tr>
-    <td align="center">
-      <img src="docs/gifs/gameplay-level1.gif" alt="Gameplay run through level 1" width="420" />
-      <br />
-      <sub>Main gameplay loop</sub>
-    </td>
-    <td align="center">
-      <img src="docs/gifs/leaderboard-showcase.gif" alt="Leaderboard display and high score flow" width="420" />
-      <br />
-      <sub>Leaderboard and score flow</sub>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="docs/gifs/leaderboard-showcase.gif" alt="Leaderboard display and high score flow" width="640" />
+  <br />
+  <sub>Leaderboard and score flow</sub>
+</p>
 
 ## What this repo contains
 
