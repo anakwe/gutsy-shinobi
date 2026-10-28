@@ -1,0 +1,47 @@
+name: Screensaver checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --ignore-scripts
+        working-directory: frontend
+      - run: npm audit --audit-level=low
+        working-directory: frontend
+      - run: npm run test:run && npm run build
+        working-directory: frontend
+      - run: bash screensaver/macos/build.sh
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        runtime: [win-x64, win-arm64]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: "10.0.x"
+      - run: npm ci --ignore-scripts
+        working-directory: frontend
+      - run: dotnet run --project screensaver/tests/LaunchOptions.Tests.csproj
+      - run: ./screensaver/windows/build.ps1 -Runtime ${{ matrix.runtime }}
+        shell: pwsh

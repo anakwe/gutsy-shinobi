@@ -5,6 +5,8 @@ import {
   isHighScore,
   loadLeaderboard,
   sanitiseName,
+  safeJsonParse,
+  saveLeaderboard,
 } from "./leaderboardStore";
 
 function makeStorage(seed = {}) {
@@ -75,5 +77,68 @@ describe("leaderboardStore", () => {
     const text = formatLeaderboardText([{ name: "SHINOBI", score: 99 }]);
     expect(text).toContain("SHINOBI");
     expect(text).toContain("99");
+  });
+
+  it("keeps running when storage reads and writes are denied", () => {
+    const storage = {
+      getItem() {
+        throw new Error("Denied");
+      },
+      setItem() {
+        throw new Error("Quota exceeded");
+      },
+    };
+    expect(loadLeaderboard(storage, "board")).toEqual([]);
+    expect(isHighScore(storage, "board", 5)).toBe(true);
+    expect(addHighScore(storage, "board", "A", 5)[0].score).toBe(5);
+    expect(() => saveLeaderboard(storage, "board", [])).not.toThrow();
+    expect(loadLeaderboard(null, "board")).toEqual([]);
+  });
+
+  it("rejects malformed or oversized stored data", () => {
+    for (const raw of [
+      "{",
+      "null",
+      "{}",
+      '"text"',
+      " ".repeat(65537),
+      JSON.stringify(Array(1001).fill({ score: 1 })),
+    ]) {
+      expect(loadLeaderboard(makeStorage({ board: raw }), "board")).toEqual([]);
+    }
+    expect(safeJsonParse("x".repeat(65537), [])).toEqual([]);
+  });
+
+  it("validates stored scores and sanitises stored names", () => {
+    const storage = makeStorage({
+      board: JSON.stringify([
+        { name: "BAD\n<script>!!", score: 9, ts: -4 },
+        { name: "BAD", score: "Infinity" },
+        { name: "BAD", score: "40" },
+        { name: "BAD", score: -1 },
+        { name: "BAD", score: 1.5 },
+        { name: "BAD", score: Number.MAX_SAFE_INTEGER + 1 },
+        null,
+      ]),
+    });
+    expect(loadLeaderboard(storage, "board", 10, () => 99)).toEqual([
+      { name: "BADSCRIPT", score: 9, ts: 99 },
+    ]);
+  });
+
+  it("rejects invalid score submissions without persisting them", () => {
+    const storage = makeStorage();
+    for (const score of [
+      NaN,
+      Infinity,
+      -1,
+      1.2,
+      "30",
+      Number.MAX_SAFE_INTEGER + 1,
+    ]) {
+      expect(isHighScore(storage, "board", score)).toBe(false);
+      expect(addHighScore(storage, "board", "A", score)).toEqual([]);
+    }
+    expect(storage.dump("board")).toBeUndefined();
   });
 });

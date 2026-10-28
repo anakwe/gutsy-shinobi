@@ -1,31 +1,30 @@
-# User Guide
+# Play and preview
 
-## Goal
+## Browser game
 
-Guide the shinobi through bamboo barriers and survive hazards as long as possible.
+Guide the shinobi through bamboo gates to earn points. Six levels introduce speed, moving bamboo, wind, and enemy shurikens. Sword deflection becomes available in level 4; successful deflections add combo bonuses. Level completion advances automatically after a short victory animation.
 
-## Start playing
+![Browser gameplay](screenshots/gameplay.png)
 
-1. Run the game locally (`npm run dev` from `frontend/`).
-2. Open the local URL in your browser.
-3. Press `Space` (or click/tap) to begin.
+| Input                               | Action                                                                                      |
+| ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| Space / pointer press               | Jump                                                                                        |
+| Enter / pointer release             | Deflect when the window is open; otherwise confirm, close an overlay, or restart when armed |
+| L                                   | Toggle leaderboard                                                                          |
+| Esc                                 | Close leaderboard when not entering a name                                                  |
+| A–Z, 0–9, space, underscore, hyphen | High-score name entry, up to 12 characters                                                  |
+| Backspace / Enter                   | Edit / save a high-score name                                                               |
 
-## Controls
+After a crash, the game waits five seconds before offering high-score entry or restart. A high-score name must be saved before closing that overlay. Resizing the browser restarts the current run.
 
-- `Space` or tap/click: jump
-- `Enter`: deflect when prompted, otherwise confirm/restart interactions
-- `L`: toggle leaderboard
-- `Esc`: close leaderboard
+## Local scores
 
-## Scoring and progression
+The top ten scores are stored in that browser's `localStorage`. Clearing site data removes them. Storage restrictions do not stop the game, but scores may not persist. Names and scores remain local; they are editable by the user and are not suitable as a trusted shared leaderboard.
 
-- Passing barriers increases score.
-- Deflect timing windows add combo-based bonus potential.
-- Levels progressively introduce speed, moving barriers, wind, and shurikens.
+## Screensaver animation
 
-## Local leaderboard
+Open `/screensaver.html` on the development or production web host for silent autoplay. It hides the HUD, prompts, ad placeholders, and local scores; it creates no game controls and loads no audio. It cycles through all six palettes and restarts automatically. Close the tab to end a browser preview.
 
-- Scores are saved to browser-local storage only.
-- Clearing browser storage removes local leaderboard history.
-- Scores are not shared between devices or browsers.
-- Leaderboard data does not leave your machine.
+![Screensaver night palette](screenshots/screensaver-night.png)
+
+The installed native hosts let the OS start/stop the animation. Input dismisses a native saver, and the configured OS password policy controls sign-in. The animation cannot be used for interactive play while locked. See [screensaver installation](screensaver-guide.md), [the gallery](screenshots/README.md), and [security notes](security-review.md).

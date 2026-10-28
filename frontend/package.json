@@ -2,10 +2,9 @@
   "name": "gutsy-shinobi",
   "private": true,
   "version": "1.0.0",
-  "description": "Arcade browser game inspired by Flappy Bird, built with Vite + Phaser.",
+  "description": "Browser arcade game and offline native screensaver animation for macOS and Windows.",
   "type": "module",
   "license": "MIT",
-  "author": "Kelly Corlett",
   "repository": {
     "type": "git",
     "url": "https://github.com/anakwe/gutsy-shinobi.git"
@@ -19,13 +18,20 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "build:screensaver": "vite build --config vite.screensaver.config.js",
+    "screenshots": "node scripts/screenshot.js",
+    "playtest": "node scripts/playtest.js"
   },
   "devDependencies": {
-    "vite": "^7.1.0",
-    "vitest": "^3.2.4"
+    "puppeteer": "25.16.0",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
   },
   "dependencies": {
     "phaser": "^3.90.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

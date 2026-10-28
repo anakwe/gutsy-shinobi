@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>GutsyShinobi</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <WarningsAsErrors>NU1901;NU1902;NU1903;NU1904</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4258.31" />
+    <Content Include="../../frontend/dist-screensaver/*">
+      <Link>Web/%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <Target Name="RequireWebAssets" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('../../frontend/dist-screensaver/index.html')" Text="Run npm run build:screensaver in frontend first." />
+  </Target>
+  <!-- The SDK also adds WPF assemblies; this host uses only WinForms. -->
+  <Target Name="RemoveUnusedWpfReference" BeforeTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <Reference Remove="@(Reference)" Condition="'%(Reference.Filename)' == 'Microsoft.Web.WebView2.Wpf'" />
+    </ItemGroup>
+  </Target>
+</Project>

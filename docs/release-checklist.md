@@ -1,29 +1,34 @@
-# Public Release Checklist
+# Release checklist
 
-Use this checklist before making the repository public.
+Screensaver support is unreleased. Run these checks in this GitHub-connected checkout before a release; generated packages are not committed.
 
-## Repository hygiene
+## Source and privacy
 
-- [ ] Confirm no secrets in tracked files (`.env`, tokens, keys, private certs).
-- [ ] Confirm `.gitignore` covers generated artifacts and local secrets.
-- [ ] Verify archived files in `docs/archive/` contain no sensitive data.
+- [ ] Review the complete staged diff, including pre-existing local changes.
+- [ ] Scan source and staged files for credentials, unintended personal paths and screenshot metadata.
+- [ ] Keep MIT attribution and public repository URLs intact; omit optional personal package metadata.
+- [ ] Confirm environment files, signing keys, diagnostic output, dependencies and build outputs are ignored.
 
-## Quality checks
+## Automated checks
 
-- [ ] Run frontend tests: `cd frontend && npm run test:run`.
-- [ ] Run production build: `cd frontend && npm run build`.
-- [ ] Run dependency audit: `cd frontend && npm audit --omit=dev`.
-- [ ] Perform a manual playthrough and restart flow check.
+- [ ] `npm --prefix frontend ci --ignore-scripts`
+- [ ] `npm --prefix frontend run test:run`
+- [ ] `npm --prefix frontend run build`
+- [ ] `npm --prefix frontend run build:screensaver`
+- [ ] `npm --prefix frontend audit` (include development tooling)
+- [ ] `dotnet run --project screensaver/tests/LaunchOptions.Tests.csproj`
+- [ ] Build the universal macOS bundle and both Windows packages; review NuGet audit results.
 
-## Public metadata
+## Target-device behavior
 
-- [ ] Update `frontend/package.json` `repository`, `homepage`, and `bugs` URLs.
-- [ ] Verify `README.md` quick start and controls are accurate.
-- [ ] Confirm license file is present and correct (`LICENSE`).
-- [ ] Add release notes / tag (`v1.0.0` or chosen version).
+- [ ] Browser controls, costume progression, effects, scores, overlays and restart flow.
+- [ ] Native settings previews, repeated start/stop, multiple monitors, offline operation and display sleep.
+- [ ] Actual idle activation and password-on-resume on each supported OS. A manual preview does not prove locking.
+- [ ] Developer ID signing/notarization for macOS and Authenticode signing for Windows distribution.
 
-## Optional hardening
+## Documentation and publication
 
-- [ ] Enable GitHub secret scanning and dependency alerts.
-- [ ] Add branch protection and required checks before merge.
-
+- [ ] Verify [README](../README.md), [native setup](screensaver-guide.md), [security review](security-review.md), and [screenshots](screenshots/README.md).
+- [ ] Update the unreleased [changelog](../CHANGELOG.md) and version only when tagging a release.
+- [ ] Review package contents and signing provenance; preserve every Windows package file together.
+- [ ] Publish only after explicit approval; repository edits do not authorize a push or release.

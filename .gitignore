@@ -1,15 +1,45 @@
-__pycache__/
-.venv/
-node_modules/
-dist/
-build/
-coverage/
+# Local secrets and signing material. These rules do not redact Git history.
 .env
 .env.*
-*.log
-*.pyc
-.poetry/
-.mypy_cache/
-.pytest_cache/
+!.env.example
+*.local
+*.pem
+*.key
+*.p12
+*.pfx
+*.cer
+*.mobileprovision
+.aws/
+
+# Dependencies and generated web/native packages.
+node_modules/
+dist/
+dist-ssr/
+dist-screensaver/
+/screensaver/build/
+**/bin/
+**/obj/
+coverage/
+*.saver/
+*.scr
+
+# OS, editor and diagnostic files.
 .DS_Store
 .idea/
+.vscode/
+*.log
+*.suo
+*.user
+*.sw?
+
+# Local Python tools, if used for maintenance.
+__pycache__/
+*.pyc
+.venv/
+.mypy_cache/
+.pytest_cache/
+
+# Existing local capture/debug output is retained on disk but never committed.
+/frontend/playtest_out*/
+/frontend/screenshots*/
+/frontend/artifacts/
